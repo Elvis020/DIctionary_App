@@ -11,20 +11,27 @@ def translate(w):
     data = json.load(open("/home/spacey/Projects_with_Python/App_1/2.2 data.json"))
 
     if w in data.keys():
-        return print(f"""{w}: {data[w]}""")
+        for n in iter(data[w]):
+            print(n)
     else:
         similar_words = get_close_matches(w, data.keys())
         if len(similar_words) > 0:
             simi = input("""Do you mean "%s".Enter y if Yes or n if No: """ % similar_words[0]).upper()
             if simi == "Y":
-                return print(f"""{similar_words[0]}:{data[similar_words[0]]}""")
+                if len(data[similar_words[0]]) == 1:
+                    for n in iter(data[similar_words[0]]):
+                        print(n)
+                else:
+                    for n in iter(data[similar_words[0]]):
+                        print(n)
+                    # print(f"""{similar_words[0]}:{data[similar_words[0]]}""")
             else:
-                return print("The word " + "\"" + w + "\"" + " doesn't exist, please double check your spelling.")
+                print("The word " + "\"" + w + "\"" + " doesn't exist, please double check your spelling.")
 
 word = input("Plaese enter a word: ").casefold()
 output = translate(word)
-for n in range(output):
-    print(output)
+# for n in range(output):
+#     print(output)
 # Note: The difflib libraray was used to find the similarity between words
 # import json
 # data = json.load(open("/home/spacey/Projects_with_Python/App_1/2.2 data.json"))
